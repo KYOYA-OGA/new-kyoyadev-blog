@@ -1,0 +1,40 @@
+---
+import BlogItem from "@components/BlogItem.astro";
+import LinkButton from "@components/LinkButton";
+import MainLayout from "@layouts/MainLayout.astro";
+
+export async function getStaticPaths({paginate}:any){
+  const posts = await Astro.glob('../posts/*.md');
+  const sortedPosts = posts.sort((a, b) => {
+  return Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date);
+})
+  return paginate(sortedPosts, {pageSize:3})
+}
+const {page} = Astro.props;
+
+// const totalPageArray = new Array(page.total).fill('');
+
+---
+
+<MainLayout title="KyoyaDev">
+  {page.data.map( (post:any)=>{
+    return <BlogItem key={post.frontmatter.url} post={post} />
+  })}
+  <div class="mt-10 space-y-6">
+    <!-- 現在のページを表示 -->
+    <!-- <p class="text-center">{page.currentPage} / {page.lastPage} ページ中</p> -->
+
+    <!-- すべてのページを表示 -->
+    <!-- <ul class="flex justify-center gap-x-3">
+      {totalPageArray.map((_,index)=>{
+        const pageNum = index + 1;
+        return <li><a href={`/blogs/${pageNum}`} class={`bg-blue-500 px-3 py-2 rounded-full text-white ${pageNum === page.currentPage ? 'ring-4 ring-blue-600' : null}`}>{pageNum}</a></li>
+      })}
+    </ul> -->
+
+    <div class="flex justify-center items-center gap-x-5 md:gap-x-8">
+      <LinkButton href={page.url.prev} disabled={!page.url.prev}>新しい記事へ</LinkButton>
+      <LinkButton href={page.url.next} disabled={!page.url.next}>古い記事へ</LinkButton>
+    </div>
+  </div>
+</MainLayout>

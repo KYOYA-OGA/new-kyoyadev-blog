@@ -1,17 +1,17 @@
 ---
+import Container from "@components/Container";
 import Footer from "@components/Footer";
 import Header from "@components/Header";
 
-// import Header from
-export interface Props {
-	title?: string;
-}
+// export interface Props {
+// 	title?: string;
+// }
 
-const { title } = Astro.props as Props;
+const { title } = Astro.props ;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -20,32 +20,38 @@ const { title } = Astro.props as Props;
 		<title>{title}</title>
 	</head>
 	<body class="dark:bg-primary bg-soft-white dark:text-soft-white">
-    <div class="min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[100%]">
+    <div class="min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[100%] overflow-hidden">
       <Header client:load/>
-      <main class="flex-1">
-        <slot />
+      <main>
+        <Container className="py-5 md:pt-10 md:pb-16">
+          <slot />
+        </Container>
       </main>
       <Footer/>
     </div>
   </body>
 </html>
 
-<script is:inline>
-  const theme = (()=>{
-    if(typeof window.localStorage !== 'undefined' && localStorage.getItem('theme')){
-      return localStorage.getItem('theme')
+<!-- <script is:inline>
+  const getTheme = (() => {
+    if (
+      typeof window.localStorage !== 'undefined' &&
+      localStorage.getItem('theme')
+    ) {
+      return localStorage.getItem('theme');
     }
-    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-      return 'dark'
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
     }
-    return 'light'
+    return 'light';
   })();
 
-  if(theme === 'light'){
-    document.documentElement.classList.remove('dark')
-  }else{
-    document.documentElement.classList.add('dark')
+  if (getTheme === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
   }
-  window.localStorage.setItem('theme', theme)
-</script>
+
+  window.localStorage.setItem('theme', getTheme);
+</script> -->
 

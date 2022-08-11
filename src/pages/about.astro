@@ -1,0 +1,40 @@
+---
+// import { Image } from '@astrojs/image/components';
+import Heading from "@components/Heading";
+import SocialIcons from "@components/SocialIcons";
+import kyoya from "@images/static/kyoya.jpg.webp";
+import MainLayout from "@layouts/MainLayout.astro";
+
+---
+
+<MainLayout title="About">
+  <Heading title="About" subTitle="私について"/>
+  <div class="mt-10 space-y-7 text-lg leading-relaxed lg:space-y-0 lg:flex lg:items-start lg:justify-center lg:space-x-32">
+    <div class="lg:shrink-0 lg:w-1/4 lg:pt-20">
+      <img src={kyoya} class="rounded-full mx-auto shadow-md" alt="Kyoya" width={240} height={240} loading="lazy" />
+      <div class="mt-7">
+        <SocialIcons/>
+      </div>
+    </div>
+    <div class="space-y-10 lg:w-3/4">
+      <div>
+        <h2 class="text-3xl border-l-8 border-blue-500 pl-4">略歴</h2>
+        <div class="mt-5 space-y-3">
+          <p>インターネットの世界に魅了され続けているWeb系エンジニアです。新しい技術が大好き。<br>早大哲学科卒業&rarr;大学院生&rarr;シーシャカフェ店長&rarr;リサイクル屋&rarr;リフォーム職人&rarr;中小工務店営業&rarr;タイ🇹🇭留学という濃い目の経験の後、Webエンジニアに転身。</p>
+          <p>現在は主にWeb制作会社様の外注パートナーとして活動しています。同時に個人開発を試行錯誤中。英語とタイ語話せます。</p>
+          <p>猛烈に学び、誠実にアウトプットします。自らの経験とスキルをまわりの方々の問題解決につなげていければ幸いです。</p>
+        </div>
+      </div>
+      <div class="">
+        <h2 class="text-3xl border-l-8 border-blue-500 pl-4">できること</h2>
+          <ul class="mt-5 list-inside list-disc space-y-3">
+            <li>通常サイト制作<br />お問い合わせフォーム付きランディングページやイベント告知ページ等、HTML/CSS/JavaScriptによる基本的なWebページ制作。</li>
+            <li>Jamstackサイト制作<br />Jamstackとは静的サイトジェネレーターと呼ばれる類のフレームワークを用いて Webサイトを構築する手法です。CMSのデータをビルド時にAPIを通じて取得することでセキュアな動的サイトが実現できます。また、フレームワークによってパフォーマンスが最適化されるため、ページ表示が高速なのも特徴。近年ますます注目度が上がってきている技術です。本サイトもこの手法で構築されています。</li>
+            <li>Web アプリ開発<br />ReactによるWebアプリケーションの開発。フロントエンド領域はもちろん、FirebaseやSupabase等のBaaSと組み合わせてフルスタックな開発への対応も可能です。</li>
+            <li>WordPress構築<br />代表的なCMSであるWordPressによるサイト制作。コーポレートサイト向けのオリジナルテーマ制作をメインとしたご対応になります。もちろんヘッドレス化への対応も可能です。</li>
+          </ul>
+        </div>
+    </div>
+  </div>
+
+</MainLayout>

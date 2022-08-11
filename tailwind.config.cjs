@@ -4,16 +4,6 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: {
-        sans: [
-          'Helvetica Neue',
-          `Arial`,
-          'Hiragino Kaku Gothic ProN',
-          'Hiragino Sans',
-          `Meiryo`,
-          `sans-serif`,
-        ],
-      },
       colors: {
         primary: '#3e4657',
         secondary: '#272727',
@@ -21,6 +11,32 @@ module.exports = {
         'light-subtle': 'rgba(39,39,39,0.5)',
         'soft-white': '#dddcda',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            blockquote: {
+              borderLeftColor: theme('colors.blue.500'),
+            },
+          },
+        },
+        invert: {
+          css: {
+            color: theme('colors.soft-white'),
+            p: {
+              color: theme('colors.soft-white'),
+            },
+            hr: {
+              borderColor: theme('colors.soft-white'),
+            },
+            'li::marker': {
+              color: theme('colors.soft-white'),
+            },
+            blockquote: {
+              borderLeftColor: theme('colors.blue.500'),
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],

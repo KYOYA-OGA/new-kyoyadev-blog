@@ -1,14 +1,21 @@
 ---
 import BlogItem from "@components/BlogItem.astro";
-import Container from "@components/Container";
+import LinkButton from "@components/LinkButton";
 import MainLayout from "@layouts/MainLayout.astro";
+const posts = await Astro.glob('./posts/*.md');
+const sortedPosts = posts.sort((a, b) => {
+  return Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date);
+})
+const firstThreePosts = sortedPosts.slice(0, 3);
 
 ---
 
-<MainLayout>
-  <Container className="py-5 md:py-10">
-    <BlogItem/>
-    <BlogItem/>
-    <BlogItem/>
-  </Container>
+<MainLayout title="KyoyaDev">
+  {firstThreePosts.map((post) => (
+    <BlogItem key={post.frontmatter.url} post={post} />
+  ))}
+  <div class="mt-10 max-w-sm mx-auto">
+  <LinkButton secondary href="/blogs/1">ブログ一覧ページへ</LinkButton>
+  </div>
+
 </MainLayout>

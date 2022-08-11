@@ -1,0 +1,39 @@
+---
+import Container from "@components/Container";
+import Footer from "@components/Footer";
+import Header from "@components/Header";
+import LinkButton from '@components/LinkButton';
+
+const { content, headings } = Astro.props ;
+// console.log(content, headings);
+
+---
+
+<!DOCTYPE html>
+<html class="dark" lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{content.title}</title>
+	</head>
+	<body class="dark:bg-primary bg-soft-white dark:text-soft-white">
+    <div class="min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[100%]">
+      <Header client:load/>
+      <main>
+        <Container small className="py-10 md:py-20">
+          <div class="prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
+            <slot />
+          </div>
+          <div class="mt-10 max-w-sm mx-auto">
+            <LinkButton href="/">一覧ページへ</LinkButton>
+          </div>
+        </Container>
+      </main>
+      <Footer/>
+    </div>
+  </body>
+</html>
+
+

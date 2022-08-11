@@ -1,17 +1,32 @@
+---
+import type { FrontMatter } from "src/types";
+import LinkButton from "./LinkButton";
 
+const {post} = Astro.props;
 
-<article class="border-t border-primary dark:border-soft-white p-5 flex flex-col gap-y-2 lg:gap-x-10 lg:flex-row lg:items-start lg:p-10">
+const {title, url, date, lastmod, tags, excerpt} = post.frontmatter as FrontMatter;
+
+---
+
+<article class="border-t border-primary dark:border-soft-white p-5 flex flex-col gap-y-2 lg:gap-x-10 lg:flex-row lg:items-start md:py-10">
   <p class="flex-shrink-0">
-    <date>2022年9月25日</date>
+    <date>{date}</date>
   </p>
-  <div class="space-y-3 lg:space-y-5">
+  <div class="space-y-5">
     <h2 class="text-2xl lg:text-3xl">
-      <a href="" class="hover:opacity-80 transition-opacity">タイトル</a>
+      <a href={url} class="hover:opacity-80 transition-opacity">{title}</a>
     </h2>
-    <ul class="flex gap-3 flex-wrap">
-      <li><a href="" class="bg-primary text-soft-white dark:text-secondary dark:bg-soft-white py-1 px-1.5 rounded-lg hover:opacity-90 transition-opacity">React</a></li>
-    </ul>
-    <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum assumenda minima nihil magnam autem ad, recusandae magni aut dolorem esse excepturi molestias deserunt temporibus odit, modi eum, laborum animi consequuntur?</p>
-    <a href="" class="bg-blue-600 text-soft-white dark:text-soft-white rounded-md px-3 py-1.5 inline-block underline-offset-2 hover:opacity-90 hover:underline transition-opacity text-lg">記事を読む<span class="align-top">&rarr;</span></a>
+    {tags ?
+      <ul class="flex gap-3 flex-wrap">
+        {tags.map(( tag :string ) =>{
+          return (
+            <li>
+              <a href="" class="bg-primary text-soft-white dark:text-secondary dark:bg-soft-white text-sm lg:text-base py-1 px-3 rounded-lg hover:opacity-90 transition-opacity">{tag}</a>
+            </li>
+          )
+        })}
+      </ul> : null}
+    <p class="">{excerpt}</p>
+    <LinkButton href={url} className="inline-block">記事を読む<span class="align-top">&rarr;</span></LinkButton>
   </div>
 </article>

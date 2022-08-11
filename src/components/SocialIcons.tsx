@@ -1,6 +1,6 @@
-import githubIcon from '/icons/iconmonstr-github-1.svg';
-import linkedinIcon from '/icons/iconmonstr-linkedin-3.svg';
-import twitterIcon from '/icons/iconmonstr-twitter-4.svg';
+import githubIcon from '@images/icons/iconmonstr-github-1.svg';
+import linkedinIcon from '@images/icons/iconmonstr-linkedin-3.svg';
+import twitterIcon from '@images/icons/iconmonstr-twitter-4.svg';
 
 export default function SocialIcons() {
   return (
