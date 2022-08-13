@@ -1,23 +1,36 @@
-import githubIcon from '@images/icons/iconmonstr-github-1.svg';
-import linkedinIcon from '@images/icons/iconmonstr-linkedin-3.svg';
-import twitterIcon from '@images/icons/iconmonstr-twitter-4.svg';
+import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs/index';
 
 export default function SocialIcons() {
   return (
     <ul className="flex justify-center space-x-5 lg:space-x-7">
       <li>
-        <a href="" className="hover:opacity-80 transition-opacity">
-          <img src={githubIcon} alt="github" />
+        <a
+          target="_blank"
+          href="https://github.com/KYOYA-OGA"
+          className="hover:opacity-80 transition-opacity"
+        >
+          <BsGithub size={24} />
+          <span className="sr-only">GitHub</span>
         </a>
       </li>
       <li>
-        <a href="" className="hover:opacity-80 transition-opacity">
-          <img src={twitterIcon} alt="github" />
+        <a
+          target="_blank"
+          href="https://twitter.com/gasamobile1"
+          className="hover:opacity-80 transition-opacity"
+        >
+          <BsTwitter size={24} />
+          <span className="sr-only">Twitter</span>
         </a>
       </li>
       <li>
-        <a href="" className="hover:opacity-80 transition-opacity">
-          <img src={linkedinIcon} alt="github" />
+        <a
+          target="_blank"
+          href="https://th.linkedin.com/in/kyoya-oga"
+          className="hover:opacity-80 transition-opacity"
+        >
+          <BsLinkedin size={24} />
+          <span className="sr-only">Instagram</span>
         </a>
       </li>
     </ul>

@@ -1,22 +1,24 @@
 ---
-// import { Image } from '@astrojs/image/components';
+import { Image } from '@astrojs/image/components';
+import ContactMe from '@components/ContactMe';
 import Heading from "@components/Heading";
 import SocialIcons from "@components/SocialIcons";
-import kyoya from "@images/static/kyoya.jpg.webp";
+import kyoya from "@images/kyoya.jpg.webp";
 import MainLayout from "@layouts/MainLayout.astro";
-
 ---
 
 <MainLayout title="About">
   <Heading title="About" subTitle="私について"/>
-  <div class="mt-10 space-y-7 text-lg leading-relaxed lg:space-y-0 lg:flex lg:items-start lg:justify-center lg:space-x-32">
-    <div class="lg:shrink-0 lg:w-1/4 lg:pt-20">
-      <img src={kyoya} class="rounded-full mx-auto shadow-md" alt="Kyoya" width={240} height={240} loading="lazy" />
-      <div class="mt-7">
+  <div class="mt-10 space-y-7 text-lg leading-relaxed lg:space-y-0 lg:flex lg:items-start lg:justify-center lg:space-x-20">
+    <div class="flex flex-col items-center lg:shrink-0 lg:w-1/4 lg:pt-20">
+      <Image src={kyoya} class="w-60 rounded-full mx-auto shadow-md" alt="Kyoya" width={500} height={500} />
+      <div class="mt-7 space-y-5">
         <SocialIcons/>
+        <ContactMe/>
       </div>
+
     </div>
-    <div class="space-y-10 lg:w-3/4">
+    <div class="space-y-10 lg:flex-1">
       <div>
         <h2 class="text-3xl border-l-8 border-blue-500 pl-4">略歴</h2>
         <div class="mt-5 space-y-3">

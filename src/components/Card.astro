@@ -1,37 +1,41 @@
 ---
+import { BsGithub } from 'react-icons/bs/index';
+import { TbExternalLink } from 'react-icons/tb/index';
 import type { ProjectData } from "src/types";
-
 const {title, description, githubLink, imageSrc, href}  = Astro.props as ProjectData;
-
-const imagePath = `/src/images/static/${imageSrc}`
 
 ---
 
 <div class="p-4 text-primary dark:text-soft-white">
   <div class="h-full overflow-hidden border-2 dark:border-gray-400 rounded-lg shadow-md flex flex-col">
-    <img alt={title}
-      src={imagePath}
-      class="object-cover object-center aspect-video"
-      >
+    <img
+      alt={title}
+      src={imageSrc}
+      class="object-cover aspect-video"
+      width={400}
+      />
     <div class="p-6 flex flex-col flex-grow">
       <h2 class="mb-3 text-2xl font-bold ">{title}</h2>
       <p class="mb-5 lg:text-lg lg:leading-relaxed">{description}</p>
       <div class="mt-auto flex items-center justify-center space-x-7">
         {githubLink && (
           <a
+            target="_blank"
             href={githubLink}
-            class="dark:hover:text-primary-400"
+            class="hover:brightness-110 transition"
             aria-label={`Link to ${title}'s github repo'`}
           >
             <div class="flex items-center flex-col space-y-2">
-              <p class="">Github Repo</p>
+              <BsGithub size={24} />
+              <p class="">Repo</p>
             </div>
           </a>
         )}
         {href && (
-          <a href={href} class="" aria-label={`Link to ${title}`}>
+          <a target="_blank" href={href} class="hover:brightness-110 transition" aria-label={`Link to ${title}`}>
             <div class="flex items-center flex-col space-y-2">
-              <p class="">Demo Website</p>
+              <TbExternalLink size={24} />
+              <p>Demo</p>
             </div>
           </a>
         )}
