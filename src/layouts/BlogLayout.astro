@@ -5,7 +5,7 @@ import Header from "@components/Header";
 import LinkButton from '@components/LinkButton';
 
 const { content, headings } = Astro.props ;
-// console.log(content, headings);
+console.log(content, headings);
 
 ---
 
@@ -23,6 +23,14 @@ const { content, headings } = Astro.props ;
       <Header client:load/>
       <main>
         <Container small className="py-10 md:py-20">
+          <h1 class="">{content.title}</h1>
+          <div class="">
+            <p class="">公開日：{content.date}</p>
+            {content.lastmod ? `修正日：${content.lastmod}` : null}
+          </div>
+          <!-- <div class="">{content.tags.map(tag=>{
+            return ''
+          })}</div> -->
           <div class="prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-h1:border-b-4 prose-h1:pb-1 prose-h1:border-blue-500 prose-h1:max-w-fit md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
             <slot />
           </div>

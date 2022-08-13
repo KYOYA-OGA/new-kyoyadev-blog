@@ -15,7 +15,7 @@ Astroについては公式サイトにこう表現されています。([出典]
 
 websitesという言葉がミソですね。実際に、複雑なweb applicationを作りたいならNext.jsを使えば？と公式も述べています。
 
-そしてさらなる特徴として、基本的にサーバーサイドレンダリングであり、Multi Page App（MPA）であると述べられています。Astroが重要視していることのひとつに**初期表示の高速化**があり、これはクライアントサイドレンダリングあるいはSPAが抱える重大な問題ともいえます。例えば、Reactフレームワークを用いると一見爆速なように見えて、意外と初期表示が遅いことがあります。特にスマートフォンだとこの現象が顕著。Gatsbyでサイトを作ったときに実際感じました。そしてこの遅延の犯人は、SPAを構築するために配信された大量のJavaScriptだったりします。
+そしてさらなる特徴として、基本的にサーバーサイドレンダリングであり、Multi Page App（MPA）であると述べられています。Astroが重要視していることのひとつに**初期表示の高速化**があり、これはクライアントサイドレンダリングあるいはSPAが抱える重大な問題ともいえます。例えば、Create React Appでサイトを作成すると一見爆速なように見えて、実は初期表示が遅いことがあります。特にスマートフォンだとこの現象が顕著。たとえReactフレームワークを用いたとしてもこの問題はついて回ります。Gatsbyでサイトを作ったときに実際感じました。そしてこの遅延の犯人は、SPAを構築するために配信された大量のJavaScriptだったりします。
 
 Astroはフロント側へのJavaScriptの配信を最低限にして初期表示を高速にするように設計されています。というかデフォルトではゼロ。JavaScriptが必要であれば特殊な記法で明示する必要があるわけです。
 
@@ -33,17 +33,19 @@ Astroはフロント側へのJavaScriptの配信を最低限にして初期表�
 
 - コンポーネント単位で開発が可能
 
-- 様々なUIライブラリが使える。そして混ぜられる。ReactとSvelteを同時に使用するということも可能らしい。危険な気がしてなりませんが。
+- 様々なUIライブラリが使える。そして混ぜられる。つまりReactとSvelteを同時に使用するということも可能。危険な気がしてなりませんが。
+
+- 🆕TypeScriptをstrictモードにすると型チェックが効いて、ちゃんと叱ってくれる。これはv1になって改善しました。
 
 ## デメリット🤮
 
-- 微妙な開発体験。エラーでサーバーが停止することが多く、その度に立ち上げ直す必要がある。補完が効きづらい。自動インポートも効きづらい。自動インデントが効かないこと多々。もしかしてけっこう微妙…！？　 → 今後の改善に期待！
+- 微妙な開発体験。エラーでサーバーが停止することが多く、その度に立ち上げ直す必要がある。これはViteの問題なのでしょうか...。
 
-- 画像最適化プラグイン（インテグレーション）がまだ開発途上。ビルドこけまくる。
+- 補完が効きづらい。自動インポートも効きづらい。Astroファイルの自動インデントが効かないこと多々。これらは地味にストレスがたまるので、今後の改善に期待！
 
 ---
 
-今回作成するブログのサンプルは[こちら](https://astro-blog-demo.pages.dev/)。
+今回作成するブログのサンプルは[こちら](https://astro-blog-demo.pages.dev/)。実はほぼこのブログサイト...。
 
 コードは[こちら](https://github.com/KYOYA-OGA/astro-blog-demo)からご自由にご確認、ご利用ください。
 
@@ -124,7 +126,7 @@ slotの箇所に子要素が出力されます。ヘッダーについては次�
 
 Newtの登録や設定方法は省きますが...🙇‍♂️、タイトル・スラッグ・サムネイル・本文を入力・出力できるようにしておきました。
 
-全投稿を取得する関数を用意します。
+公式の[JavaScript SDK](https://github.com/Newt-Inc/newt-client-js)を用いて、Newtから全投稿を取得する関数を用意します。
 
 #### utils/api.ts
 
@@ -153,7 +155,7 @@ export const getAllPosts = async () => {
 
 認証情報はenvファイルへ。
 
-#### env
+#### .env
 
 ```
 NEWT_SPACE_UID=
@@ -161,10 +163,6 @@ NEWT_CDN_API_TOKEN=
 NEWT_APP_UID=
 NEWT_MODEL_UID=
 ```
-
-Newtさんが準備してくれている[JavaScript SDK](https://github.com/Newt-Inc/newt-client-js)を用いて投稿をとってきます。公開されている投稿をすべて取得しているだけです。シンプル。
-
-正直TSはなんちゃってです...。ちゃんと勉強しないと！
 
 ---
 
@@ -195,7 +193,7 @@ const posts: Post[] = data?.items;
 </MainLayout>
 ```
 
-インポート文や関数等は上部の点線内に記載します。マークダウンっぽいですね。
+Astroファイルでは、インポート文や関数等は上部の点線内に記載します。マークダウンっぽい。
 
 投稿を表示させるためのコンポーネントをさくっと作成します。
 
@@ -208,15 +206,13 @@ interface Props {
   children: React.ReactNode;
 }
 
-const PostGrid: React.FC<Props> = ({ children }) => {
+export default function PostGrid({ children }: Props) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-x-8 lg:gap-10 mb-10 lg:mb-32">
       {children}
     </div>
   );
-};
-
-export default PostGrid;
+}
 ```
 
 #### components/PostCard.astro
@@ -240,14 +236,9 @@ const imageUrl = image?.src;
     <LinkButton href={`/post/${id}`}>読む</LinkButton>
   </div>
 </article>
-
 ```
 
-記事を書いていて気づきましたが、別にPostGridコンポーネントはtsxである必然性はないですね。自由度が高い分、ファイルの拡張子が散らかりがち...。
-
-PostGridコンポーネントはただCSSを用意しているだけです。PostCardコンポーネントで親から渡されたpropsを展開します。
-
-本当は、画像を最適化してくれる@astrojs/image機能を使用したいのですが、Newtから配信される画像パスとの相性が悪くビルドでこけるため、泣く泣く通常のimgタグを採用しています。これはどうにかしたい...😭
+PostCard本体は画像最適化インテグレーションである@astrojs/imageを使用したいため、astroファイルで作成...したのですが、Newtから配信される画像パスとの相性が悪くビルドでこけるため、泣く泣く通常のimgタグを採用しています。これはどうにかしたい...😭
 
 リンクは使いまわせそうなので別途コンポーネントを作成します。
 
@@ -259,19 +250,18 @@ import React from 'react';
 interface Props {
   children: React.ReactNode;
   href: string;
-  className: string;
-  disabled: boolean;
+  className?: string;
+  disabled?: boolean;
 }
 
-const LinkButton: React.FC<Props> = ({
+export default function LinkButton({
   children,
   href,
   className = '',
   disabled = false,
-}) => {
+}: Props) {
   return (
     <a
-      disabled={disabled}
       href={href}
       className={`block text-center bg-blue-500 text-white py-2 px-5 rounded-lg  transition ${
         disabled ? 'brightness-50' : 'hover:brightness-110 focus:brightness-110'
@@ -280,9 +270,7 @@ const LinkButton: React.FC<Props> = ({
       {children}
     </a>
   );
-};
-
-export default LinkButton;
+}
 ```
 
 ここまで作成したコンポーネントをトップページにぶっこみます。
@@ -324,6 +312,6 @@ const posts: Post[] = data?.items;
 
 ---
 
-次回は詳細ページを作成します。
+次回以降、詳細ページを作成したり、ダークモードを実装したりします。
 
 唐突ですが、ではまた！
