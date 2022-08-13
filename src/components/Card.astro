@@ -7,14 +7,14 @@ const {title, description, githubLink, imageSrc, href}  = Astro.props as Project
 ---
 
 <div class="p-4 text-primary dark:text-soft-white">
-  <div class="h-full overflow-hidden border-2 dark:border-gray-400 rounded-lg shadow-md flex flex-col">
+  <div class="h-full overflow-hidden dark:border-2 dark:border-gray-400 rounded-lg shadow-lg flex flex-col">
     <img
       alt={title}
       src={imageSrc}
       class="object-cover aspect-video"
       width={400}
       />
-    <div class="p-6 flex flex-col flex-grow">
+    <div class="border-t border-primary bg-dark-subtle dark:bg-primary p-6 flex flex-col flex-grow">
       <h2 class="mb-3 text-2xl font-bold ">{title}</h2>
       <p class="mb-5 lg:text-lg lg:leading-relaxed">{description}</p>
       <div class="mt-auto flex items-center justify-center space-x-7">

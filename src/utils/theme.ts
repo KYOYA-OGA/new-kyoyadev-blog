@@ -1,3 +1,10 @@
+export const setDarkThemeByDefault = () => {
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    console.log('Hi! dark theme');
+    document.documentElement.classList.add('dark');
+  }
+};
+
 export const setTheme = () => {
   const getTheme = ((): string | null => {
     if (

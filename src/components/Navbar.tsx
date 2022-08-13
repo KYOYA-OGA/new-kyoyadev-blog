@@ -7,11 +7,11 @@ interface Props {
 export default function Navbar({ menuIsOpen }: Props) {
   return (
     <nav
-      className={`z-10 fixed top-0 right-0 h-screen w-1/2 max-w-md lg:w-1/6 bg-gray-500 text-soft-white transition-transform ${
+      className={`z-10 fixed top-0 right-0 h-screen w-1/2 max-w-sm lg:w-1/5 bg-gray-500 text-soft-white transition-transform ${
         menuIsOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
-      <ul className="px-3 py-20 space-y-5 text-center text-xl">
+      <ul className="px-3 pt-24 pb-10 lg:py-28 space-y-5 text-center text-xl">
         <li>
           <a className="hover:opacity-80 transition-opacity" href="/blogs/1">
             Blogs
@@ -27,11 +27,6 @@ export default function Navbar({ menuIsOpen }: Props) {
             Projects
           </a>
         </li>
-        {/* <li>
-          <a className="hover:opacity-80 transition-opacity" href="/contact">
-            Contact
-          </a>
-        </li> */}
       </ul>
       <SocialIcons />
     </nav>

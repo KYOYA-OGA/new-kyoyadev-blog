@@ -7,7 +7,7 @@ export default function ContactMe() {
         <a
           target="_blank"
           href="/static/kyoya-resume.pdf"
-          className="text-soft-white flex items-center justify-center space-x-1"
+          className="dark:text-soft-white flex items-center justify-center space-x-1"
         >
           <AiOutlineFileText size={24} />
           <span>Resume</span>
