@@ -1,0 +1,10 @@
+---
+export interface Props {
+  tag: string;
+}
+const {tag} = Astro.props as Props;
+---
+
+<li>
+  <a href="" class="bg-primary text-soft-white dark:text-secondary dark:bg-soft-white text-sm lg:text-base py-1 px-3 rounded-lg hover:opacity-90 transition-opacity">{tag}</a>
+</li>

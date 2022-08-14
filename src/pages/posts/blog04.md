@@ -3,11 +3,29 @@ title: '祝v1🎉 AstroとヘッドレスCMSで今どきなブログをつくる
 layout: '@layouts/BlogLayout.astro'
 date: '2022-08-10'
 lastmod: '2022-08-11'
-tags: ['Astro', 'TypeScript', 'Newt', React', 'Jamstack', 'SSG', 'SG']
+tags: ['Astro', 'TypeScript', 'Newt', 'React', 'Jamstack', 'SSG', 'SG']
 excerpt: '静的サイトジェネレーターの黒船ことAstroでブログをつくってみる'
 ---
 
 今回は、先日ついに正式リリースされた[Astro](https://astro.build/)を用いてかんたんなブログサイトを構築します。
+
+<!-- <div class="custom-block info">
+  <div class="custom-block-body">
+    <p></p>
+  </div>
+</div>
+
+<div class="custom-block warn">
+  <div class="custom-block-body">
+    <p>ここに情報文を書くここに情報文を書くここに情報文を書くここに情報文を書くここに情報文を書く</p>
+  </div>
+</div>
+
+<div class="custom-block question">
+  <div class="custom-block-body">
+    <p>ここに情報文を書くここに情報文を書くここに情報文を書くここに情報文を書くここに情報文を書く</p>
+  </div>
+</div> -->
 
 Astroについては公式サイトにこう表現されています。([出典](https://docs.astro.build/en/concepts/why-astro/))
 

@@ -15,24 +15,28 @@ module.exports = {
         DEFAULT: {
           css: {
             blockquote: {
-              borderLeftColor: theme('colors.blue.500'),
+              borderLeftColor: theme('colors.sky.500'),
+            },
+            a: {
+              color: theme('colors.sky.700'),
             },
           },
         },
+
         invert: {
           css: {
             color: theme('colors.soft-white'),
             p: {
               color: theme('colors.soft-white'),
             },
+            a: {
+              color: theme('colors.sky.500'),
+            },
             hr: {
               borderColor: theme('colors.soft-white'),
             },
             'li::marker': {
               color: theme('colors.soft-white'),
-            },
-            blockquote: {
-              borderLeftColor: theme('colors.blue.500'),
             },
           },
         },

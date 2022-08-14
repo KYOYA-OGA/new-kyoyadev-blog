@@ -1,6 +1,7 @@
 ---
 import type { FrontMatter } from "src/types";
 import LinkButton from "./LinkButton";
+import TagItem from "./TagItem.astro";
 
 const {post} = Astro.props;
 
@@ -20,9 +21,7 @@ const {title, url, date, lastmod, tags, excerpt} = post.frontmatter as FrontMatt
       <ul class="flex gap-3 flex-wrap">
         {tags.map(( tag :string ) =>{
           return (
-            <li>
-              <a href="" class="bg-primary text-soft-white dark:text-secondary dark:bg-soft-white text-sm lg:text-base py-1 px-3 rounded-lg hover:opacity-90 transition-opacity">{tag}</a>
-            </li>
+            <TagItem tag={tag} />
           )
         })}
       </ul> : null}

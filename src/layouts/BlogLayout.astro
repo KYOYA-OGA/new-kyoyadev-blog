@@ -1,63 +1,107 @@
 ---
-import Container from "@components/Container";
-import Footer from "@components/Footer";
-import Header from "@components/Header";
 import LinkButton from '@components/LinkButton';
+import TagItem from '@components/TagItem.astro';
+import MainLayout from "./MainLayout.astro";
 
 const { content, headings } = Astro.props ;
-console.log(content, headings);
+// console.log(content, headings);
 
 ---
 
-<!DOCTYPE html>
-<html lang="ja">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{content.title}</title>
-	</head>
-	<body class="dark:bg-primary bg-soft-white dark:text-soft-white">
-    <div class="min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[100%]">
-      <Header client:load/>
-      <main>
-        <Container small className="py-10 md:py-20">
-          <h1 class="">{content.title}</h1>
-          <div class="">
-            <p class="">公開日：{content.date}</p>
-            {content.lastmod ? `修正日：${content.lastmod}` : null}
-          </div>
-          <!-- <div class="">{content.tags.map(tag=>{
-            return ''
-          })}</div> -->
-          <div class="prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-h1:border-b-4 prose-h1:pb-1 prose-h1:border-blue-500 prose-h1:max-w-fit md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
-            <slot />
-          </div>
-          <div class="mt-10 max-w-sm mx-auto">
-            <LinkButton href="/">一覧ページへ</LinkButton>
-          </div>
-        </Container>
-      </main>
-      <Footer/>
+<MainLayout title={`${content.title} | KyoyaDev`}>
+  <div class="mx-auto max-w-2xl lg:max-w-4xl">
+    <div class="space-y-5">
+      <h1 class="text-2xl lg:text-3xl text-center">{content.title}</h1>
+      <div class="flex flex-col items-center justify-center space-y-3 lg:space-y-0 lg:space-x-10 lg:flex-row">
+        <p class="">公開日：{content.date}</p>
+        {content.lastmod ? <p>修正日：{content.lastmod}</p> : null}
+      </div>
+      <ul class="flex justify-center flex-wrap gap-3">
+        {content.tags.map((tag:string)=>{
+          return <TagItem tag={tag} />
+        })}
+      </ul>
     </div>
-  </body>
-</html>
+    <div class="mt-10 prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-h1:border-b-4 prose-h1:pb-1 prose-h1:border-sky-700 dark:prose-h1:border-sky-500 prose-h1:max-w-fit md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
+      <slot />
+    </div>
+    <div class="mt-10 max-w-sm mx-auto">
+      <LinkButton href="/">一覧ページへ</LinkButton>
+    </div>
+  </div>
+</MainLayout>
 
-<script is:inline>
-  // チラツキ防止
-  // localStorageにデータがあるときはそちらを適用
-  if(typeof window.localStorage.getItem('theme') === 'string'){
-    const currentTheme = window.localStorage.getItem('theme');
-    if(currentTheme === 'dark'){
-      document.documentElement.classList.add('dark');
-    }
+<style is:inline>
+  .custom-block {
+    border-radius: 5px;
+    margin: 1.5rem 0;
   }
-  // localStorageになにもない時はmatchMediaで判定
-  if (!typeof window.localStorage.getItem('theme') === 'string' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.classList.add('dark');
+  .custom-block > .custom-block-body {
+    position: relative;
+    padding: 5px 15px 5px 40px;
+    border-radius: 6px;
   }
-</script>
+  .dark .custom-block > .custom-block-body p {
+    color: #272727;
+  }
+  .info > .custom-block-body {
+    background: #FEF6E4;
+  }
+  .dark .info > .custom-block-body {
+    background: #ffb84c;
+  }
+  .warn > .custom-block-body {
+    background: #FEEFF2;
+  }
+  .dark .warn > .custom-block-body {
+    background: #FF7670;
+  }
+  .question > .custom-block-body {
+    background: #DBF8DD;
+  }
+  .dark .question > .custom-block-body {
+    background: #40bd68;
+  }
 
-
-
+  .custom-block > .custom-block-body::before {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 1em;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 50%;
+  }
+  .info > .custom-block-body::before {
+    content: "!";
+    color: #fff;
+    background: #ffb84c;
+  }
+  .dark .info > .custom-block-body::before{
+    background: #FEF6E4;
+    color: #713f12;
+  }
+  .warn > .custom-block-body::before {
+    content: "!!";
+    color: #dddcda;
+    background: #FF7670;
+  }
+  .dark .warn > .custom-block-body::before{
+    background: #FEEFF2;
+    color: #272727;
+  }
+  .question > .custom-block-body::before {
+    content: "?";
+    color: #dddcda;
+    background: #04C441;
+  }
+  .dark .question > .custom-block-body::before{
+    background: #FEEFF2;
+    color: #272727;
+  }
+</style>
