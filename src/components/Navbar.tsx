@@ -7,7 +7,7 @@ interface Props {
 export default function Navbar({ menuIsOpen }: Props) {
   return (
     <nav
-      className={`z-10 fixed top-0 right-0 h-screen w-1/2 max-w-sm lg:w-1/5 bg-gray-500 text-soft-white transition-transform ${
+      className={`z-10 fixed top-0 right-0 h-screen w-1/2 max-w-xs lg:w-1/5 bg-gray-500 text-soft-white transition-transform ${
         menuIsOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >

@@ -9,31 +9,13 @@ excerpt: '静的サイトジェネレーターの黒船ことAstroでブログ�
 
 今回は、先日ついに正式リリースされた[Astro](https://astro.build/)を用いてかんたんなブログサイトを構築します。
 
-<!-- <div class="custom-block info">
-  <div class="custom-block-body">
-    <p></p>
-  </div>
-</div>
-
-<div class="custom-block warn">
-  <div class="custom-block-body">
-    <p>ここに情報文を書くここに情報文を書くここに情報文を書くここに情報文を書くここに情報文を書く</p>
-  </div>
-</div>
-
-<div class="custom-block question">
-  <div class="custom-block-body">
-    <p>ここに情報文を書くここに情報文を書くここに情報文を書くここに情報文を書くここに情報文を書く</p>
-  </div>
-</div> -->
-
 Astroについては公式サイトにこう表現されています。([出典](https://docs.astro.build/en/concepts/why-astro/))
 
 > Astro is an all-in-one web framework for building fast, content-focused websites.
 
 websitesという言葉がミソですね。実際に、複雑なweb applicationを作りたいならNext.jsを使えば？と公式も述べています。
 
-そしてさらなる特徴として、基本的にサーバーサイドレンダリングであり、Multi Page App（MPA）であると述べられています。Astroが重要視していることのひとつに**初期表示の高速化**があり、これはクライアントサイドレンダリングあるいはSPAが抱える重大な問題ともいえます。例えば、Create React Appでサイトを作成すると一見爆速なように見えて、実は初期表示が遅いことがあります。特にスマートフォンだとこの現象が顕著。たとえReactフレームワークを用いたとしてもこの問題はついて回ります。Gatsbyでサイトを作ったときに実際感じました。そしてこの遅延の犯人は、SPAを構築するために配信された大量のJavaScriptだったりします。
+そしてさらなる特徴として、基本的にサーバーサイドレンダリングであり、Multi Page App（MPA）であると述べられています。Astroが重要視していることのひとつに**初期表示の高速化**があり、これはクライアントサイドレンダリングあるいはSPAが抱える重大な問題ともいえます。例えば、Create React Appでサイトを作成すると一見爆速なように見えて、実は初期表示が遅いことがあります。特にスマートフォンだとこの現象が顕著。そしてこの遅延の犯人は、SPAを構築するために配信された大量のJavaScriptだったりします。
 
 Astroはフロント側へのJavaScriptの配信を最低限にして初期表示を高速にするように設計されています。というかデフォルトではゼロ。JavaScriptが必要であれば特殊な記法で明示する必要があるわけです。
 
@@ -59,7 +41,7 @@ Astroはフロント側へのJavaScriptの配信を最低限にして初期表�
 
 - 微妙な開発体験。エラーでサーバーが停止することが多く、その度に立ち上げ直す必要がある。これはViteの問題なのでしょうか...。
 
-- 補完が効きづらい。自動インポートも効きづらい。Astroファイルの自動インデントが効かないこと多々。これらは地味にストレスがたまるので、今後の改善に期待！
+- 補完が効きづらい。自動インポートも効きづらい。Astroファイルの自動インデントが効かないこと多々。これらは地味にストレスがたまるので今後の改善に期待！
 
 ---
 
@@ -89,13 +71,11 @@ Astro は特定のライブラリやフレームワークに依存していな�
 
 が、今回は個人的な好みによりReactを採用します。
 
-有名なライブラリであればインテグレーションが用意されているため、セットアップは容易です。
+有名なライブラリであればインテグレーションが用意されているため、セットアップは容易です。この機能はかなり便利。
 
 ```
 npx astro add react
 ```
-
-もちろん、特にライブラリを用いなくとも.astroで開発可能です。
 
 ---
 
@@ -124,7 +104,7 @@ import Footer from '@components/Footer'
   <body class="dark:bg-primary bg-slate-200 dark:text-gray-100">
     <!-- メインの要素が足りないときにフッター下部に隙間ができるのを防ぐ -->
     <div class="min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[100%]">
-      <Header client:load/>
+      <Header />
       <main class="flex-1">
         <slot /> <!-- your content is injected here -->
       </main>
@@ -134,7 +114,58 @@ import Footer from '@components/Footer'
 </html>
 ```
 
-slotの箇所に子要素が出力されます。ヘッダーについては次回以降触れます。
+slotの箇所に子要素が出力されます。
+
+ヘッダーとフッターは適当ですがこんな感じで。
+
+#### components/Header.tsx
+
+```tsx
+import Container from './Container';
+
+export default function Header() {
+  return (
+    <header className="py-5 md:py-5 shadow">
+      <Container>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight">
+            <a href="/">タイトルです</a>
+          </h2>
+          <div className="flex items-center space-x-5">
+            <a href="/contact" className="">
+              お問い合わせ
+            </a>
+          </div>
+        </div>
+      </Container>
+    </header>
+  );
+}
+```
+
+#### components/Footer.tsx
+
+```tsx
+import Container from './Container';
+
+export default function Footer() {
+  return (
+    <footer className="dark:bg-secondary bg-slate-300 dark:text-gray-100">
+      <Container>
+        <p className="text-center py-3">フッターです</p>
+      </Container>
+    </footer>
+  );
+}
+```
+
+このようにさくっとjsx(tsx)を混ぜられるのがAstroの特徴です。
+
+<div class="custom-block info">
+  <div class="custom-block-body">
+    <p>ヘッダーにメニューボタンを追加する等、JSが必要な場合はclient:load等のディレクティブが必要になりますが、今回は割愛します。このあたりの機能はまた改めて紹介します。</p>
+  </div>
+</div>
 
 ---
 
@@ -324,12 +355,71 @@ const posts: Post[] = data?.items;
 </MainLayout>
 ```
 
-投稿一覧を表示できました！
-
-![投稿一覧ページ](/blogs/blog04/blog-list.jpeg)
+これで[投稿一覧](https://astro-blog-demo.pages.dev/)を表示できました！
 
 ---
 
-次回以降、詳細ページを作成したり、ダークモードを実装したりします。
+# 詳細ページ作成
 
-唐突ですが、ではまた！
+詳細ページをつくるためには、どのページが生成されるべきかをAstroにあらかじめ教えてあげる必要があります。そのためには各々のページの固有のIDが必要で、今回はNewtにより発行されるidを用います。（本当はスラッグのような意味のある短めの文字列が推奨されています...🤡）
+
+~~うまい説明が思いつかないため、~~ まずは結果から見てみましょう。実はまんまNext.jsです。
+
+#### pages/post/[id].astro
+
+```astro
+---
+// import { Image } from '@astrojs/image/components';
+import Container from "@components/Container";
+import LinkButton from '@components/LinkButton';
+import MainLayout from "@layouts/MainLayout.astro";
+import Data from '@utils/data.json';
+import { parse } from 'node-html-parser';
+import { getAllPosts } from 'src/utils/api';
+type Post = typeof Data;
+
+// [id]として設定した動的なRouteに渡す値をgetStaticPathsで取得
+export async function getStaticPaths(){
+  const data = await getAllPosts();
+  const posts: Post[] = data.items;
+
+  // 投稿の中身も取得できる
+  return posts.map(post=>{
+    return {
+      params: {id: post._id},
+      props: {post}
+    }
+  })
+}
+
+const {post} = Astro.props;
+const imageUrl = post.thumbnail?.src;
+// node-html-parserでHTMLデータを解析
+const content = parse(post.content);
+
+---
+
+<MainLayout>
+  <Container className="py-5 max-w-5xl space-y-4 lg:space-y-8 lg:pb-20">
+    <h1 class="text-3xl text-center">{post.title}</h1>
+    <img src={imageUrl} alt={post.title} class="aspect-video object-cover">
+    <!-- <Image src={imageUrl} width={1200} aspectRatio={16/9} /> -->
+    <div class="px-5 prose max-w-none">
+      {content}
+    </div>
+    <LinkButton href="/" className="w-11/12 mx-auto max-w-sm">ホームに戻る</LinkButton>
+  </Container>
+</MainLayout>
+```
+
+contentのスタイルは[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)で処理しています。tailwind最高。
+
+ともあれ、これで[詳細ページ](https://astro-blog-demo.pages.dev/post/62e512e82ef8b2bda967095f/)を表示できました。
+
+---
+
+Astroはまだまだ開発途上のようで若干の不安定さもありますが、シンプルな設計でとっつきやすいのは間違いないです。
+
+個人的には大変気に入っているフレームワークであり、個人ブログもAstroで作り直しました。カテゴリーページやダークモードもいれてみたので今後紹介できればと思います。
+
+ではまた！
