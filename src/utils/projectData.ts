@@ -5,7 +5,7 @@ export const projectsData = [
     description:
       'MERNスタックにて構築した映画・ドラマレビューアプリ。基本的な認証に加えてOTP認証も実装。管理者権限でコンテンツの登録が可能で、通常ユーザーにはレビュー投稿機能を提供しています。',
     githubLink: 'https://github.com/KYOYA-OGA/mern-review-app-frontend',
-    href: 'https://mern-review-app-frontend.pages.dev/',
+    // href: 'https://mern-review-app-frontend.pages.dev/',
   },
   {
     title: 'Netflix Clone',
