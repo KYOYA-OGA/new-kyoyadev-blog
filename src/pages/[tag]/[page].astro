@@ -17,7 +17,6 @@ export async function getStaticPaths({paginate}:any){
   })
 
   const filteredAllTags =[...new Set(allTags)];
-  const filteredAllTagsForSlug = filteredAllTags.map(tag=>tag.toLowerCase().replace('.','-'));
 
   return filteredAllTags.map(tag=>{
     const filteredPosts = sortedPosts.filter((post)=>{
@@ -32,11 +31,11 @@ export async function getStaticPaths({paginate}:any){
 }
 const {page} = Astro.props;
 const params = Astro.params;
-
+const tagNameForUI =page.data[0].frontmatter.tags.filter((tag:string)=>tag.toLowerCase().replace('.','-') === params.tag)
 ---
 
 <MainLayout title="Blogs">
-  <Heading title={params.tag?.toString() || 'Category'} subTitle="に関する記事一覧" />
+  <Heading title={tagNameForUI[0] || '🤡'} subTitle="に関する記事一覧" />
   <div class="mt-5 lg:mt-10">
     {page.data.map( (post:any)=>{
       return <BlogItem key={post.frontmatter.url} post={post} />
