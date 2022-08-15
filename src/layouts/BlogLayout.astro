@@ -3,9 +3,16 @@ import LinkButton from '@components/LinkButton';
 import TagItem from '@components/TagItem.astro';
 import MainLayout from "./MainLayout.astro";
 
-const { content, headings } = Astro.props ;
-// console.log(content, headings);
+export interface Heading{
+  depth: number;
+  slug: string;
+  text: string;
+}
 
+const { content, headings } = Astro.props ;
+const heading1 = headings.filter((heading:Heading)=>{
+  return heading.depth === 1;
+})
 ---
 
 <MainLayout title={`${content.title} | KyoyaDev`}>
@@ -21,6 +28,16 @@ const { content, headings } = Astro.props ;
           return <TagItem tag={tag} />
         })}
       </ul>
+
+      <details>
+        <summary class="cursor-pointer">目次</summary>
+        <ul class="bg-primary text-soft-white dark:bg-soft-white dark:text-secondary mt-1 p-3 space-y-3 list-disc list-inside">
+          {heading1.map((heading:Heading)=>{
+            return <li><a class="hover:underline" href={`#${heading.slug}`}>{heading.text}</a></li>
+          })}
+        </ul>
+      </details>
+
     </div>
     <div class="mt-10 prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-h1:border-b-4 prose-h1:pb-1 prose-h1:border-sky-700 dark:prose-h1:border-sky-500 prose-h1:max-w-fit md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
       <slot />

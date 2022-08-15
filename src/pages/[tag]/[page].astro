@@ -1,0 +1,51 @@
+---
+import BlogItem from "@components/BlogItem.astro";
+import Heading from "@components/Heading";
+import LinkButton from "@components/LinkButton";
+import MainLayout from "@layouts/MainLayout.astro";
+
+export async function getStaticPaths({paginate}:any){
+  const posts = await Astro.glob('../posts/*.md');
+  const sortedPosts = posts.sort((a, b) => {
+  return Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date);
+  })
+
+  let allTags:string[] = [];
+  posts.forEach((post)=>{
+    const tagsInPost = post.frontmatter.tags;
+    allTags = [...allTags, ...tagsInPost];
+  })
+
+  const filteredAllTags =[...new Set(allTags)];
+  const filteredAllTagsForSlug = filteredAllTags.map(tag=>tag.toLowerCase().replace('.','-'));
+
+  return filteredAllTags.map(tag=>{
+    const filteredPosts = sortedPosts.filter((post)=>{
+      return post.frontmatter.tags.includes(tag);
+    })
+    const tagForSlug = tag.toLowerCase().replace('.','-');
+    return paginate(filteredPosts, {
+      params: {tag: tagForSlug},
+      pageSize: 6,
+    })
+  })
+}
+const {page} = Astro.props;
+const params = Astro.params;
+
+---
+
+<MainLayout title="Blogs">
+  <Heading title={params.tag?.toString() || 'Category'} subTitle="に関する記事一覧" />
+  <div class="mt-5 lg:mt-10">
+    {page.data.map( (post:any)=>{
+      return <BlogItem key={post.frontmatter.url} post={post} />
+    })}
+    <div class="mt-10 space-y-6">
+      <div class="flex justify-center items-center gap-x-5 md:gap-x-8">
+        <LinkButton href={page.url.prev} disabled={!page.url.prev}>新しい記事へ</LinkButton>
+        <LinkButton href={page.url.next} disabled={!page.url.next}>古い記事へ</LinkButton>
+      </div>
+    </div>
+  </div>
+</MainLayout>
