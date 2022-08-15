@@ -3,19 +3,19 @@ import LinkButton from '@components/LinkButton';
 import TagItem from '@components/TagItem.astro';
 import MainLayout from "./MainLayout.astro";
 
-export interface Heading{
+export interface Heading {
   depth: number;
   slug: string;
   text: string;
 }
 
-const { content, headings } = Astro.props ;
+const { content, headings } = Astro.props;
 const heading1 = headings.filter((heading:Heading)=>{
   return heading.depth === 1;
 })
 ---
 
-<MainLayout title={`${content.title} | KyoyaDev`}>
+<MainLayout title={`${content.title} | KyoyaDev Blog`} description={content.excerpt}>
   <div class="mx-auto max-w-2xl lg:max-w-4xl">
     <div class="space-y-5">
       <h1 class="text-2xl lg:text-3xl text-center">{content.title}</h1>
