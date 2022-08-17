@@ -3,7 +3,7 @@ title: '祝v1🎉 AstroとヘッドレスCMSで今どきなブログをつくる
 layout: '@layouts/BlogLayout.astro'
 date: '2022-08-10'
 lastmod: '2022-08-11'
-tags: ['Astro', 'TypeScript', 'Newt', 'React', 'Jamstack', 'SSG', 'SG']
+tags: ['Astro', 'TypeScript', 'Newt', 'React', 'Jamstack', 'SG']
 excerpt: '静的サイトジェネレーターの黒船ことAstroでブログをつくってみる'
 ---
 

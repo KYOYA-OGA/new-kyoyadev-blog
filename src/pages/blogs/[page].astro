@@ -17,9 +17,12 @@ const {page} = Astro.props;
 ---
 
 <MainLayout title="Blogs" description="KyoyaDev Blog Archive Page">
-  {page.data.map( (post:any)=>{
-    return <BlogItem key={post.frontmatter.url} post={post} />
-  })}
+  <div class="divide-y divide-primary dark:divide-soft-white">
+    {page.data.map( (post:any)=>{
+      return <BlogItem key={post.frontmatter.url} post={post} />
+    })}
+  </div>
+
   <div class="mt-10 space-y-6">
     <!-- 現在のページを表示 -->
     <!-- <p class="text-center">{page.currentPage} / {page.lastPage} ページ中</p> -->

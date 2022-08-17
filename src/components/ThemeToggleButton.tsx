@@ -1,6 +1,4 @@
-// import { useStore } from '@nanostores/react';
 import { useEffect, useState } from 'react';
-// import { currentTheme, toggleTheme } from 'src/store/themeStore';
 import type { Theme } from 'src/types';
 
 export default function ThemeToggleButton() {
@@ -17,14 +15,9 @@ export default function ThemeToggleButton() {
     }
   };
 
-  // const setThemePersistent = (theme: Theme) => {
-  //   document.documentElement.classList.add('dark');
-  //   localStorage.removeItem('theme');
-  //   localStorage.setItem('theme', 'dark');
-  // };
-
   useEffect(() => {
-    setTheme(getCurrentTheme());
+    const currentTheme = getCurrentTheme();
+    setTheme(currentTheme);
   }, []);
 
   const toggleTheme = () => {

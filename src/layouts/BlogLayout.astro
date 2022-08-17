@@ -19,7 +19,7 @@ const heading1 = headings.filter((heading:Heading)=>{
   <div class="mx-auto max-w-2xl lg:max-w-4xl">
     <div class="space-y-5">
       <h1 class="text-2xl lg:text-3xl text-center">{content.title}</h1>
-      <div class="flex flex-col items-center justify-center space-y-3 lg:space-y-0 lg:space-x-10 lg:flex-row">
+      <div class="flex flex-col items-center justify-center space-y-3 md:space-y-0 md:space-x-10 md:flex-row">
         <p class="">公開日：{content.date}</p>
         {content.lastmod ? <p>修正日：{content.lastmod}</p> : null}
       </div>
@@ -39,7 +39,7 @@ const heading1 = headings.filter((heading:Heading)=>{
       </details>
 
     </div>
-    <div class="mt-10 prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-h1:border-b-4 prose-h1:border-sky-700 dark:prose-h1:border-sky-500 prose-h1:max-w-fit md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
+    <div class="mt-10 prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-h1:border-b-4 prose-h1:border-sky-700 dark:prose-h1:border-sky-500 prose-h1:max-w-fit md:prose-li:text-lg md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-li:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
       <slot />
     </div>
     <div class="mt-10 max-w-sm mx-auto">

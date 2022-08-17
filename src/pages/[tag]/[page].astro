@@ -37,9 +37,11 @@ const tagNameForUI =page.data[0].frontmatter.tags.filter((tag:string)=>tag.toLow
 <MainLayout title="Blogs" description={`${tagNameForUI[0]}に関する記事一覧`}>
   <Heading title={tagNameForUI[0] || '🤡'} subTitle="に関する記事一覧" />
   <div class="mt-5 lg:mt-10">
-    {page.data.map( (post:any)=>{
-      return <BlogItem key={post.frontmatter.url} post={post} />
-    })}
+    <div class="divide-y divide-primary dark:divide-soft-white">
+      {page.data.map( (post:any)=>{
+        return <BlogItem key={post.frontmatter.url} post={post} />
+      })}
+    </div>
     <div class="mt-10 space-y-6">
       <div class="flex justify-center items-center gap-x-5 md:gap-x-8">
         <LinkButton href={page.url.prev} disabled={!page.url.prev}>新しい記事へ</LinkButton>

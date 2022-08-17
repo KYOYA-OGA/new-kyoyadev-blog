@@ -5,12 +5,12 @@ import TagItem from "./TagItem.astro";
 
 const {post} = Astro.props;
 
-const {title, url, date, lastmod, tags, excerpt} = post.frontmatter as FrontMatter;
+const {title, url, date, tags, excerpt} = post.frontmatter as FrontMatter;
 
 ---
 
-<article class="border-t border-primary dark:border-soft-white p-5 flex flex-col gap-y-2 lg:gap-x-10 lg:flex-row lg:items-start md:py-10">
-  <p class="flex-shrink-0">
+<article class="p-5 flex flex-col gap-y-2 lg:gap-x-10 lg:flex-row lg:items-start md:py-10">
+  <p class="flex-shrink-0 lg:pt-1">
     <date>{date}</date>
   </p>
   <div class="space-y-5">
