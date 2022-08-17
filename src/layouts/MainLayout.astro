@@ -24,14 +24,14 @@ const { title, description } = Astro.props as Props;
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://kyoya.dev/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content={title}>
+    <meta property="og:title" content={`${title} | KyoyaDev`}>
     <meta property="og:description" content={description ?? 'This site is KyoyaDev Blog and portfolio.'}>
     <meta property="og:image" content="/ogp.jpg">
     <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="/favicons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="kyoya.dev">
     <meta property="twitter:url" content="https://kyoya.dev/">
-    <meta name="twitter:title" content={title}>
+    <meta name="twitter:title" content={`${title} | KyoyaDev`}>
     <meta name="twitter:description" content={description ?? 'This site is KyoyaDev Blog and portfolio.'}>
     <meta name="twitter:image" content="/ogp.jpg">
 	</head>
