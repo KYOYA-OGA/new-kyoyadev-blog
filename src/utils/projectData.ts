@@ -8,6 +8,14 @@ export const projectsData = [
     href: 'https://mern-review-app-frontend.pages.dev/',
   },
   {
+    title: 'Jobify App',
+    imageSrc: '/static/jobify.jpg',
+    description:
+      'MERNスタックによる求人管理アプリケーション。応募した仕事をグラフや一覧とともに管理できます。検索機能も充実しています。ダミーのアドレスでも機能を試すことができます。',
+    githubLink: 'https://github.com/KYOYA-OGA/mern-jobify-app',
+    href: 'https://jobify-app-new.herokuapp.com',
+  },
+  {
     title: 'Netflix Clone',
     imageSrc: '/static/netflix-clone.jpg.webp',
     description:
