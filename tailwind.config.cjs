@@ -20,6 +20,9 @@ module.exports = {
             a: {
               color: theme('colors.sky.700'),
             },
+            hr: {
+              borderColor: theme('colors.primary'),
+            },
             'li::marker': {
               color: theme('colors.primary'),
             },

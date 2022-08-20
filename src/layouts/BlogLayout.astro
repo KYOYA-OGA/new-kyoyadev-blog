@@ -39,11 +39,11 @@ const heading1 = headings.filter((heading:Heading)=>{
       </details>
 
     </div>
-    <div class="mt-10 prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-h1:border-b-4 prose-h1:border-sky-700 dark:prose-h1:border-sky-500 prose-h1:max-w-fit md:prose-li:text-lg md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-li:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
+    <div class="mt-10 prose max-w-none dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-img:mx-auto md:prose-li:text-lg md:prose-p:text-lg md:prose-p:leading-relaxed lg:prose-h2:text-2xl lg:prose-h1:text-3xl lg:prose-p:text-xl lg:prose-li:text-xl lg:prose-p:leading-relaxed lg:prose-code:text-lg">
       <slot />
     </div>
     <div class="mt-10 max-w-sm mx-auto">
-      <LinkButton href="/">一覧ページへ</LinkButton>
+      <LinkButton href="/blogs/1">一覧ページへ</LinkButton>
     </div>
   </div>
 </MainLayout>
@@ -51,11 +51,11 @@ const heading1 = headings.filter((heading:Heading)=>{
 <style is:inline>
   .custom-block {
     border-radius: 5px;
-    margin: 1.5rem 0;
+    margin: 1.5em 0;
   }
   .custom-block > .custom-block-body {
     position: relative;
-    padding: 5px 15px 5px 40px;
+    padding: 5px 15px 5px 2.6em;
     border-radius: 6px;
   }
   .dark .custom-block > .custom-block-body p {
