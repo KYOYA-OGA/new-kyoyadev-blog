@@ -36,7 +36,7 @@ module.exports = {
               color: theme('colors.soft-white'),
             },
             a: {
-              color: theme('colors.sky.500'),
+              color: theme('colors.sky.400'),
             },
             hr: {
               borderColor: theme('colors.soft-white'),
