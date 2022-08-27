@@ -6,7 +6,7 @@ export default function SocialIcons() {
       <li>
         <a
           target="_blank"
-          href="https://github.com/KYOYA-OGA"
+          href="https://github.com/kyoya-oga"
           className="hover:opacity-80 transition-opacity"
         >
           <BsGithub size={24} />
