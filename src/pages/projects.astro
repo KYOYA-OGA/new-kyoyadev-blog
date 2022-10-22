@@ -1,25 +1,35 @@
 ---
 import Card from '@components/Card.astro';
-import Heading from "@components/Heading";
-import MainLayout from "@layouts/MainLayout.astro";
-import { projectsData } from "@utils/projectData";
-
+import Heading from '@components/Heading';
+import MainLayout from '@layouts/MainLayout.astro';
+import { projectsData } from '@utils/projectData';
 ---
 
-<MainLayout title="Projects" description="I am working on personal projects every day to improve my skills as a web developer and to solve someone's problem with web technology.Here are the apps I have been working on.">
+<MainLayout
+  title="Projects"
+  description="I am working on personal projects every day to improve my skills as a web developer and to solve someone's problem with web technology.Here are the apps I have been working on."
+>
   <div class="space-y-7">
     <Heading title="My Projects" />
     <p class="md:text-lg leading-relaxed">
-      ものづくりを楽しむのと同時にエンジニアとしての引き出しを増やすために制作してきたWebアプリ一覧です。コードも公開していますのでなにかの参考になれば幸いです。
+      ものづくりを楽しむのと同時にエンジニアとしての引き出しを増やすために制作してきたWebアプリ一覧です。コードも公開していますので参考になれば幸いです。
       <br />
       一部ログインが必要なサイトがありますので、ダミーアカウントでお試しください。
     </p>
   </div>
   <div class="mt-10">
     <div class="grid md:grid-cols-2 xl:grid-cols-3">
-      {projectsData.map((data) => (
-        <Card title={data.title} description={data.description} githubLink={data.githubLink} imageSrc={data.imageSrc} href={data.href} />
-      ))}
+      {
+        projectsData.map((data) => (
+          <Card
+            title={data.title}
+            description={data.description}
+            githubLink={data.githubLink}
+            imageSrc={data.imageSrc}
+            href={data.href}
+          />
+        ))
+      }
     </div>
   </div>
 </MainLayout>

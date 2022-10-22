@@ -1,13 +1,12 @@
 export type Theme = 'light' | 'dark';
 
-export type FrontMatter = {
+export type FrontMatterType = {
   title: string;
   layout: string;
   date: string;
   lastmod?: string;
   tags?: string[];
   excerpt: string;
-  url: string;
   file: string;
 };
 
