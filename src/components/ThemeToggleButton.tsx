@@ -6,8 +6,10 @@ export default function ThemeToggleButton() {
 
   const getCurrentTheme = (): Theme => {
     if (
-      typeof localStorage.getItem('theme') === 'string' &&
-      localStorage.getItem('theme') === 'dark'
+      (typeof localStorage.getItem('theme') === 'string' &&
+        localStorage.getItem('theme') === 'dark') ||
+      (typeof window.localStorage.getItem('theme') !== 'string' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       return 'dark';
     } else {

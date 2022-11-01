@@ -2,7 +2,7 @@
 title: 'Astroサイトにダークモードを実装する'
 layout: '@layouts/BlogLayout.astro'
 date: '2022-08-17'
-# lastmod: '2022-08-11'
+lastmod: '2022-11-01'
 tags: ['Astro', 'TypeScript', 'React', 'Jamstack', 'SG']
 excerpt: 'Astroで作成したサイトにダークモード機能をつける'
 ---
@@ -49,16 +49,17 @@ import type { Theme } from 'src/types';
 export default function ThemeToggleButton() {
   const [theme, setTheme] = useState<Theme | undefined>(undefined);
 
-  const getCurrentTheme = (): Theme => {
-    if (
-      typeof localStorage.getItem('theme') === 'string' &&
-      localStorage.getItem('theme') === 'dark'
-    ) {
-      return 'dark';
-    } else {
-      return 'light';
-    }
-  };
+  if (
+    (typeof localStorage.getItem('theme') === 'string' &&
+      localStorage.getItem('theme') === 'dark') ||
+    // 初期表示時にmatchMediaに合わせる
+    (typeof window.localStorage.getItem('theme') !== 'string' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    return 'dark';
+  } else {
+    return 'light';
+  }
 
   useEffect(() => {
     const currentTheme = getCurrentTheme();
@@ -114,33 +115,33 @@ export type Theme = 'light' | 'dark';
 #### layouts/MainLayout.astro
 
 ```astro
-<!-- ... -->
-<!DOCTYPE html>
+<!-- ... --><!DOCTYPE html>
 <html lang="ja">
   <head>
-  <!-- ... -->
+    <!-- ... -->
   </head>
   <body class="dark:bg-primary bg-soft-white dark:text-soft-white">
-  <!-- ... -->
-    <Header client:load/>
-  <!-- ... -->
+    <!-- ... -->
+    <Header client:load />
+    <!-- ... -->
+    <script is:inline>
+      // localStorageにデータがあるときはそちらを適用
+      if (typeof window.localStorage.getItem('theme') === 'string') {
+        const currentTheme = window.localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      }
+      // localStorageになにもない時はmatchMediaで判定
+      if (
+        typeof window.localStorage.getItem('theme') !== 'string' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
   </body>
-</html>
-<!-- ... -->
-<script is:inline>
-  // チラツキ防止
-  // localStorageにデータがあるときはそちらを適用
-  if(typeof window.localStorage.getItem('theme') === 'string'){
-    const currentTheme = window.localStorage.getItem('theme');
-    if(currentTheme === 'dark'){
-      document.documentElement.classList.add('dark');
-    }
-  }
-  // localStorageになにもない時はmatchMediaで判定
-  if (!typeof window.localStorage.getItem('theme') === 'string' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.classList.add('dark');
-  }
-</script>
+</html><!-- ... -->
 ```
 
 繰り返しになりますが、localStorageにテーマ情報があるときはそちらを適用して、localStorageに情報がない場合にwindow.matchMediaでユーザーの好みを引っ張ってきます。
@@ -152,6 +153,5 @@ export type Theme = 'light' | 'dark';
 # 気づいている問題点
 
 - ページレイアウトが複数ある場合に同じコードを繰り返し書くことになる。共通の関数にして読み込ませるとうまくいかなかった...。
-- なんか気持ち悪い。もっと良い書き方がある気がしてならない🤔
 
 ではまた！
