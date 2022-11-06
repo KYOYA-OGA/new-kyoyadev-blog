@@ -8,14 +8,6 @@ export const projectsData = [
     href: 'https://mern-review-app-frontend.pages.dev/',
   },
   {
-    title: 'Jobify App',
-    imageSrc: '/static/jobify.jpg',
-    description:
-      'MERNスタックによる求人管理アプリケーション。応募した仕事をグラフや一覧とともに管理できます。検索機能も充実しています。ダミーのアドレスでも機能を試すことができます。',
-    githubLink: 'https://github.com/KYOYA-OGA/mern-jobify-app',
-    href: 'https://jobify-app-new.herokuapp.com',
-  },
-  {
     title: 'Netflix Clone',
     imageSrc: '/static/netflix-clone.jpg.webp',
     description:
@@ -23,14 +15,45 @@ export const projectsData = [
     githubLink: 'https://github.com/KYOYA-OGA/netflix-clone',
     href: 'https://netflix-clone-ochre-five.vercel.app/',
   },
+  // {
+  //   title: 'e-VENTs',
+  //   imageSrc: '/static/next-event.jpg.webp',
+  //   description:
+  //     'フロントエンドをNext.js、バックエンドをStrapiで構築したイベント作成アプリ。基本的な認証機能の',
+  //   githubLink: 'https://github.com/KYOYA-OGA/next-events',
+  //   href: 'https://next-events-nine-xi.vercel.app',
+  // },
   {
-    title: 'Gatsby Tech Blog',
-    imageSrc: '/static/gatsby-dev-blog.jpg.webp',
+    title: 'Jobify App',
+    imageSrc: '/static/jobify.jpg',
     description:
-      'フレームワークとしてGatsbyを採用した静的ブログサイト。CMSにはsanityを採用。カテゴリーでの絞り込みやページネーション、検索機能等、ブログに必要な機能を網羅しています。',
-    githubLink: 'https://github.com/KYOYA-OGA/gatsby-tech-blog-tutorial',
-    href: 'https://gatsby-tech-blog-tutorial.pages.dev/',
+      'MERNスタックによる求人管理アプリケーション。応募した仕事をグラフや一覧とともに管理できます。検索機能も充実しています。',
+    githubLink: 'https://github.com/KYOYA-OGA/mern-jobify-app',
+    href: 'https://mern-jobify-app.onrender.com/',
   },
+  {
+    imageSrc: '/static/comfy-store.jpg.webp',
+    title: 'React Comfy Store',
+    description:
+      'Reactで構築されたダミーネットショップ。認証はAuth0、決済はStripeを採用。商品のフィルタリング機能も実装しています。',
+    githubLink: 'https://github.com/KYOYA-OGA/react-comfy-store-demo',
+    href: 'https://react-comfy-store-demo.netlify.app',
+  },
+  // {
+  //   title: 'Gatsby Tech Blog',
+  //   imageSrc: '/static/gatsby-dev-blog.jpg.webp',
+  //   description:
+  //     'フレームワークとしてGatsbyを採用した静的ブログサイト。CMSにはsanityを採用。カテゴリーでの絞り込みやページネーション、検索機能等、ブログに必要な機能を網羅しています。',
+  //   githubLink: 'https://github.com/KYOYA-OGA/gatsby-tech-blog-tutorial',
+  //   href: 'https://gatsby-tech-blog-tutorial.pages.dev/',
+  // },
+  // {
+  //   title: 'YouTube Clone',
+  //   description: `React + Redux + firebase + YouTube DATA API で構築した YouTube クローン`,
+  //   imageSrc: '/static/youtube-clone.jpg.webp',
+  //   href: 'https://not-real-yt.firebaseapp.com/',
+  //   githubLink: 'https://github.com/KYOYA-OGA/youtube-clone',
+  // },
   {
     title: 'Coffee Connoisseur',
     imageSrc: '/static/coffee-connoisseur.jpeg.webp',
@@ -39,34 +62,14 @@ export const projectsData = [
     githubLink: 'https://github.com/KYOYA-OGA/next-coffee-connoisseur',
     href: 'https://coffee-stores-discover.netlify.app/',
   },
-  {
-    title: 'Github Finder',
-    imageSrc: '/static/github-finder-app.jpg.webp',
-    description: 'React & tailwindcssで構築したGithubユーザー情報検索アプリ',
-    githubLink: 'https://github.com/KYOYA-OGA/github-finder',
-    href: 'https://github-finder-ivory.vercel.app',
-  },
-  {
-    title: 'YouTube Clone',
-    description: `React + Redux + firebase + YouTube DATA API で構築した YouTube クローン`,
-    imageSrc: '/static/youtube-clone.jpg.webp',
-    href: 'https://not-real-yt.firebaseapp.com/',
-    githubLink: 'https://github.com/KYOYA-OGA/youtube-clone',
-  },
-  {
-    title: 'React Awesome Shop',
-    imageSrc: '/static/awesome-shop.jpg.webp',
-    description:
-      'フロントエンドをReact、バックエンドをFirebaseで構築したサーバーレスなショッピングサイト',
-    githubLink: 'https://github.com/KYOYA-OGA/react-awesome-store-JP',
-  },
-  {
-    imageSrc: '/static/comfy-store.jpg.webp',
-    title: 'React Comfy Store',
-    description: 'SPAで構築された架空のネットショップ',
-    githubLink: 'https://github.com/KYOYA-OGA/react-comfy-store-demo',
-    href: 'https://react-comfy-store-demo.netlify.app',
-  },
+  // {
+  //   title: 'Github Finder',
+  //   imageSrc: '/static/github-finder-app.jpg.webp',
+  //   description: 'React & tailwindcssで構築したGithubユーザー情報検索アプリ',
+  //   githubLink: 'https://github.com/KYOYA-OGA/github-finder',
+  //   href: 'https://github-finder-ivory.vercel.app',
+  // },
+
   {
     title: 'Github User Search',
     imageSrc: '/static/github-user.jpg.webp',
@@ -75,41 +78,33 @@ export const projectsData = [
     githubLink: 'https://github.com/KYOYA-OGA/search-github-user',
     href: 'https://react-github-user-searching.netlify.app',
   },
-  {
-    title: 'e-VENTs',
-    imageSrc: '/static/next-event.jpg.webp',
-    description:
-      'フロントエンドをNext.js、バックエンドをStrapiで構築したイベント作成アプリ',
-    githubLink: 'https://github.com/KYOYA-OGA/next-events',
-    href: 'https://next-events-nine-xi.vercel.app',
-  },
-  {
-    title: 'Dev.to Clone',
-    imageSrc: '/static/dev-to-clone.jpg.webp',
-    description: 'Next.js & Firebase 製Dev.toクローン',
-    githubLink: 'https://github.com/KYOYA-OGA/dev.to-clone',
-    href: 'https://dev-to-clone-flax.vercel.app/',
-  },
-  {
-    title: 'Next Amazona',
-    imageSrc: '/static/amazona.jpg.webp',
-    description: 'React(Next.js) & Material-UI & MongoDB 製ショッピングサイト',
-    githubLink: 'https://github.com/KYOYA-OGA/next-amazona',
-    href: 'https://next-amazona-taupe.vercel.app',
-  },
-  {
-    title: 'ファイル共有アプリ',
-    imageSrc: '/static/fileshare-app.jpg.webp',
-    description:
-      'ファイルをアップロードして共有できるサイト。メール送信機能付き。',
-    githubLink: 'https://github.com/KYOYA-OGA/fileshare-app-frontend',
-    href: 'https://fileshare-app-frontend.vercel.app',
-  },
-  {
-    title: 'Venue LP',
-    imageSrc: '/static/venue.jpg.webp',
-    description: 'Next.js製それっぽいランディングページ',
-    githubLink: 'https://github.com/KYOYA-OGA/venue_lp',
-    href: 'https://venue-lp.vercel.app',
-  },
+  // {
+  //   title: 'Dev.to Clone',
+  //   imageSrc: '/static/dev-to-clone.jpg.webp',
+  //   description: 'Next.js & Firebase 製Dev.toクローン',
+  //   githubLink: 'https://github.com/KYOYA-OGA/dev.to-clone',
+  //   href: 'https://dev-to-clone-flax.vercel.app/',
+  // },
+  // {
+  //   title: 'Next Amazona',
+  //   imageSrc: '/static/amazona.jpg.webp',
+  //   description: 'React(Next.js) & Material-UI & MongoDB 製ショッピングサイト',
+  //   githubLink: 'https://github.com/KYOYA-OGA/next-amazona',
+  //   href: 'https://next-amazona-taupe.vercel.app',
+  // },
+  // {
+  //   title: 'ファイル共有アプリ',
+  //   imageSrc: '/static/fileshare-app.jpg.webp',
+  //   description:
+  //     'ファイルをアップロードして共有できるサイト。メール送信機能付き。',
+  //   githubLink: 'https://github.com/KYOYA-OGA/fileshare-app-frontend',
+  //   href: 'https://fileshare-app-frontend.vercel.app',
+  // },
+  // {
+  //   title: 'Venue LP',
+  //   imageSrc: '/static/venue.jpg.webp',
+  //   description: 'Next.js製それっぽいランディングページ',
+  //   githubLink: 'https://github.com/KYOYA-OGA/venue_lp',
+  //   href: 'https://venue-lp.vercel.app',
+  // },
 ];
