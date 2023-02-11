@@ -1,7 +1,7 @@
 ---
 import LinkButton from '@components/LinkButton';
 import TagItem from '@components/TagItem.astro';
-import MainLayout from "./MainLayout.astro";
+import MainLayout from './MainLayout.astro';
 
 export interface Heading {
   depth: number;
@@ -10,12 +10,12 @@ export interface Heading {
 }
 
 const { content, headings } = Astro.props;
-const heading1 = headings.filter((heading:Heading)=>{
+const heading1 = headings.filter((heading: Heading) => {
   return heading.depth === 1;
-})
+});
 ---
 
-<MainLayout title={`${content.title}`} description={content.excerpt}>
+<!-- <MainLayout title={`${content.title}`} description={content.excerpt}>
   <div class="mx-auto max-w-2xl lg:max-w-4xl">
     <div class="space-y-5">
       <h1 class="text-2xl lg:text-3xl text-center">{content.title}</h1>
@@ -46,8 +46,7 @@ const heading1 = headings.filter((heading:Heading)=>{
       <LinkButton href="/blogs/1">一覧ページへ</LinkButton>
     </div>
   </div>
-</MainLayout>
-
+</MainLayout> -->
 <style is:inline>
   .custom-block {
     border-radius: 5px;
@@ -62,19 +61,19 @@ const heading1 = headings.filter((heading:Heading)=>{
     color: #272727;
   }
   .info > .custom-block-body {
-    background: #FEF6E4;
+    background: #fef6e4;
   }
   .dark .info > .custom-block-body {
     background: #ffb84c;
   }
   .warn > .custom-block-body {
-    background: #FEEFF2;
+    background: #feeff2;
   }
   .dark .warn > .custom-block-body {
-    background: #FF7670;
+    background: #ff7670;
   }
   .question > .custom-block-body {
-    background: #DBF8DD;
+    background: #dbf8dd;
   }
   .dark .question > .custom-block-body {
     background: #40bd68;
@@ -95,39 +94,41 @@ const heading1 = headings.filter((heading:Heading)=>{
     border-radius: 50%;
   }
   .info > .custom-block-body::before {
-    content: "!";
+    content: '!';
     color: #fff;
     background: #ffb84c;
   }
-  .dark .info > .custom-block-body::before{
-    background: #FEF6E4;
+  .dark .info > .custom-block-body::before {
+    background: #fef6e4;
     color: #713f12;
   }
   .warn > .custom-block-body::before {
-    content: "!!";
+    content: '!!';
     color: #dddcda;
-    background: #FF7670;
+    background: #ff7670;
   }
-  .dark .warn > .custom-block-body::before{
-    background: #FEEFF2;
+  .dark .warn > .custom-block-body::before {
+    background: #feeff2;
     color: #272727;
   }
   .question > .custom-block-body::before {
-    content: "?";
+    content: '?';
     color: #dddcda;
-    background: #04C441;
+    background: #04c441;
   }
-  .dark .question > .custom-block-body::before{
-    background: #FEEFF2;
+  .dark .question > .custom-block-body::before {
+    background: #feeff2;
     color: #272727;
   }
 </style>
 
 <script is:inline>
   const links = document.querySelectorAll('a');
-  const externalLinks = Array.from(links).filter(link => link.host !== window.location.host);
-  externalLinks.forEach(link => {
-    if(!link.target){
+  const externalLinks = Array.from(links).filter(
+    (link) => link.host !== window.location.host
+  );
+  externalLinks.forEach((link) => {
+    if (!link.target) {
       link.target = '_blank';
     }
   });

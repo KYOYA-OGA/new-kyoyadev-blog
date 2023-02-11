@@ -383,144 +383,142 @@ const API_URL = import.meta.env.PUBLIC_API_URL;
 ---
 
 <Layout title="Welcome to Astro.">
-	<main>
-		<h1 class="text-gradient">Contact us</h1>
-		<form id="contact-form" name="contact" data-url={API_URL}>
-			<label>
-				Name <input required type="text" name="name" />
-			</label>
-			<label>
-				Email <input required type="email" name="email" />
-			</label>
-			<label>
-				Message <textarea required name="message"></textarea>
-			</label>
+  <main>
+    <h1 class="text-gradient">Contact us</h1>
+    <form id="contact-form" name="contact" data-url={API_URL}>
+      <label>
+        Name <input required type="text" name="name" />
+      </label>
+      <label>
+        Email <input required type="email" name="email" />
+      </label>
+      <label>
+        Message <textarea required name="message"></textarea>
+      </label>
       <button id="submitButton" type="submit">Submit</button>
-			<div class="form-result"></div>
+      <div class="form-result"></div>
     </form>
-	</main>
+  </main>
 </Layout>
 
 <script type="module" is:inline>
-	const contactForm = document.getElementById('contact-form');
-	const submitButton = document.getElementById('submitButton');
-	const formResult = document.querySelector('.form-result');
+  const contactForm = document.getElementById('contact-form');
+  const submitButton = document.getElementById('submitButton');
+  const formResult = document.querySelector('.form-result');
 
-	const apiUrl = contactForm.dataset.url;
+  const apiUrl = contactForm.dataset.url;
 
-	contactForm.addEventListener('submit',async (e) => {
-		e.preventDefault();
-		submitButton.disabled = true;
-		submitButton.innerText = 'Submitting...';
-		const formElement = document.forms.contact;
-		const data = {
-			name: formElement.name.value,
-			email: formElement.email.value,
-			message: formElement.message.value
-		};
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitButton.disabled = true;
+    submitButton.innerText = 'Submitting...';
+    const formElement = document.forms.contact;
+    const data = {
+      name: formElement.name.value,
+      email: formElement.email.value,
+      message: formElement.message.value,
+    };
 
-		const response = await fetch(apiUrl,{
-			method:'POST',
-			headers:{
-				'Content-Type':'application/json'
-			},
-			body:JSON.stringify(data)
-		})
-		const result = await response.json();
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
 
-		if(response.ok) {
-			submitButton.disabled = false;
-			submitButton.innerText = 'Submit';
-			formResult.innerText = result.message;
-			contactForm.reset();
-			return;
-		}
+    if (response.ok) {
+      submitButton.disabled = false;
+      submitButton.innerText = 'Submit';
+      formResult.innerText = result.message;
+      contactForm.reset();
+      return;
+    }
 
-		if(result.errors) {
-			const errorMessages = result.errors
-			const messageList = errorMessages.map(msg=>{
-				return msg.message
-			})
-			formResult.innerText = messageList.join('\n');
-			submitButton.disabled = false;
-			submitButton.innerText = 'Submit';
-		} else {
-			submitButton.disabled = false;
-			submitButton.innerText = 'Submit';
-			formResult.innerText = 'Something went wrong...';
-		}
-
-	});
-
+    if (result.errors) {
+      const errorMessages = result.errors;
+      const messageList = errorMessages.map((msg) => {
+        return msg.message;
+      });
+      formResult.innerText = messageList.join('\n');
+      submitButton.disabled = false;
+      submitButton.innerText = 'Submit';
+    } else {
+      submitButton.disabled = false;
+      submitButton.innerText = 'Submit';
+      formResult.innerText = 'Something went wrong...';
+    }
+  });
 </script>
 
 <style>
-	:root {
-		--astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
-	}
+  :root {
+    --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
+  }
 
-	* {
+  * {
     box-sizing: border-box;
-	}
+  }
 
-	h1 {
-		margin: 2rem 0;
-	}
+  h1 {
+    margin: 2rem 0;
+  }
 
-	main {
-		margin: auto;
-		padding: 1em;
-		max-width: 700px;
-	}
+  main {
+    margin: auto;
+    padding: 1em;
+    max-width: 700px;
+  }
 
-	.text-gradient {
-		font-weight: 900;
-		background-image: var(--astro-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 100% 200%;
-		background-position-y: 100%;
-		border-radius: 0.4rem;
-		animation: pulse 4s ease-in-out infinite;
-	}
+  .text-gradient {
+    font-weight: 900;
+    background-image: var(--astro-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 100% 200%;
+    background-position-y: 100%;
+    border-radius: 0.4rem;
+    animation: pulse 4s ease-in-out infinite;
+  }
 
-	@keyframes pulse {
-		0%,
-		100% {
-			background-position-y: 0%;
-		}
-		50% {
-			background-position-y: 80%;
-		}
-	}
-	form > * + * {
-		margin-top: 1rem;
-	}
-	label{
-		display: block;
-	}
-	input, textarea{
-		width: 100%;
-		padding: 0.5em;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		font-size: 1rem;
-
-	}
-	textarea{
-		min-height: 150px;
-	}
-	button{
-		background-color: #4f39fa;
-		color: #fff;
-		padding: 0.5em 2em;
-		border-radius: 5px;
-		cursor: pointer;
-	}
-	button:hover, button:focus{
-		opacity: 0.8;
-	}
-
+  @keyframes pulse {
+    0%,
+    100% {
+      background-position-y: 0%;
+    }
+    50% {
+      background-position-y: 80%;
+    }
+  }
+  form > * + * {
+    margin-top: 1rem;
+  }
+  label {
+    display: block;
+  }
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  textarea {
+    min-height: 150px;
+  }
+  button {
+    background-color: #4f39fa;
+    color: #fff;
+    padding: 0.5em 2em;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover,
+  button:focus {
+    opacity: 0.8;
+  }
 </style>
 ```
 

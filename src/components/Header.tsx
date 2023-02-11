@@ -1,11 +1,39 @@
 import { MenuIcon, XIcon } from '@heroicons/react/outline/index';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { Theme } from 'src/types';
 import Container from './Container';
 import Navbar from './Navbar';
 import ThemeToggleButton from './ThemeToggleButton';
 
 export default function Header() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [theme, setTheme] = useState<Theme | undefined>(undefined);
+
+  const getCurrentTheme = (): Theme => {
+    return (typeof localStorage.getItem('theme') === 'string' &&
+      localStorage.getItem('theme') === 'dark') ||
+      (typeof window.localStorage.getItem('theme') !== 'string' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ? 'dark'
+      : 'light';
+  };
+
+  useEffect(() => {
+    setTheme(getCurrentTheme());
+  }, []);
+
+  const toggleTheme = () => {
+    if (theme === 'dark') {
+      setTheme('light');
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+    if (theme === 'light') {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  };
 
   const handleMenuClick = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -20,7 +48,7 @@ export default function Header() {
               <a href="/">KyoyaDev Blog</a>
             </h2>
             <div className="flex items-center space-x-5">
-              <ThemeToggleButton />
+              <ThemeToggleButton toggleTheme={toggleTheme} theme={theme} />
               <button aria-label="menu button" onClick={handleMenuClick}>
                 {menuIsOpen ? (
                   <>

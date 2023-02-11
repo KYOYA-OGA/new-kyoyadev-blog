@@ -1,5 +1,6 @@
 ---
 title: 'Astroサイトにダークモードを実装する'
+slug: 'dark-mode-with-astro'
 layout: '@layouts/BlogLayout.astro'
 date: '2022-08-17'
 lastmod: '2022-11-01'

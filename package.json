@@ -10,23 +10,23 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/image": "^0.10.0",
-    "@astrojs/react": "^1.2.1",
+    "@astrojs/image": "^0.13.0",
+    "@astrojs/react": "^2.0.0",
     "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/tailwind": "^2.1.1",
+    "@astrojs/tailwind": "^3.0.0",
     "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/typography": "^0.5.7",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "astro": "^1.5.2",
-    "astro-robots-txt": "^0.3.10",
-    "prettier": "^2.7.1",
-    "prettier-plugin-md-nocjsp": "^1.4.0",
+    "@tailwindcss/typography": "^0.5.9",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "astro": "^2.0.0",
+    "astro-robots-txt": "^0.3.11",
+    "prettier": "^2.8.3",
+    "prettier-plugin-md-nocjsp": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
-    "react-icons": "^4.6.0"
+    "react-icons": "^4.7.1"
   }
 }

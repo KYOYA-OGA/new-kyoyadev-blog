@@ -5,8 +5,9 @@ import TagItem from './TagItem.astro';
 
 const { post } = Astro.props;
 
-const { title, date, tags, excerpt } = post.frontmatter as FrontMatterType;
-const { url } = post;
+const { title, date, tags, excerpt, lastmod } = post.data;
+const slug = post.slug;
+console.log(slug);
 ---
 
 <article
@@ -17,7 +18,9 @@ const { url } = post;
   </p>
   <div class="space-y-5">
     <h2 class="text-2xl lg:text-3xl">
-      <a href={url} class="hover:opacity-80 transition-opacity">{title}</a>
+      <a href={`/blogs/${slug}`} class="hover:opacity-80 transition-opacity"
+        >{title}</a
+      >
     </h2>
     {
       tags ? (
@@ -29,8 +32,8 @@ const { url } = post;
       ) : null
     }
     <p>{excerpt}</p>
-    <LinkButton href={url} className="inline-block"
-      >記事を読む<span class="align-top">&rarr;</span>
+    <LinkButton href={`/blogs/${slug}`} className="inline-block">
+      記事を読む<span class="align-top">&rarr;</span>
     </LinkButton>
   </div>
 </article>

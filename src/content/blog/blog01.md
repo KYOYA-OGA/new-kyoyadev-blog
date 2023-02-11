@@ -1,5 +1,6 @@
 ---
 title: 'Next.js + Headless WordPressでJamstackなサイトをつくる'
+slug: 'next-js-wp'
 layout: '@layouts/BlogLayout.astro'
 date: '2022-01-08'
 lastmod: '2022-03-02'

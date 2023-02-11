@@ -1,5 +1,6 @@
 ---
 title: '祝v1🎉 AstroとヘッドレスCMSで今どきなブログをつくる'
+slug: 'try-astro-v1'
 layout: '@layouts/BlogLayout.astro'
 date: '2022-08-10'
 lastmod: '2022-08-11'
@@ -91,24 +92,25 @@ Astro の構成は非常にシンプルで、componentsディレクトリで各�
 
 ```astro
 ---
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import Header from '@components/Header';
+import Footer from '@components/Footer';
 ---
 
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>タイトルです</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body class="dark:bg-primary bg-slate-200 dark:text-gray-100">
     <!-- メインの要素が足りないときにフッター下部に隙間ができるのを防ぐ -->
     <div class="min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[100%]">
       <Header />
       <main class="flex-1">
-        <slot /> <!-- your content is injected here -->
+        <slot />
+        <!-- your content is injected here -->
       </main>
-      <Footer/>
+      <Footer />
     </div>
   </body>
 </html>
@@ -224,15 +226,14 @@ NEWT_MODEL_UID=
 ```astro
 ---
 import { getAllPosts } from 'src/utils/api';
-import MainLayout from "@layouts/MainLayout.astro";
-import Container from "@components/Container";
+import MainLayout from '@layouts/MainLayout.astro';
+import Container from '@components/Container';
 import Data from '../utils/data.json';
 
 type Post = typeof Data;
 
 const data = await getAllPosts();
 const posts: Post[] = data?.items;
-
 ---
 
 <MainLayout>
@@ -267,18 +268,23 @@ export default function PostGrid({ children }: Props) {
 #### components/PostCard.astro
 
 ```astro
-
 ---
 // import { Image } from '@astrojs/image/components';
 import LinkButton from '@components/LinkButton';
 
-const {id, title, image} = Astro.props;
+const { id, title, image } = Astro.props;
 const imageUrl = image?.src;
-
 ---
 
-<article class="shadow-lg flex flex-col h-full rounded-md overflow-hidden dark:bg-slate-700">
-  <img src={imageUrl} width={350} alt={title} class="aspect-video object-cover mx-auto">
+<article
+  class="shadow-lg flex flex-col h-full rounded-md overflow-hidden dark:bg-slate-700"
+>
+  <img
+    src={imageUrl}
+    width={350}
+    alt={title}
+    class="aspect-video object-cover mx-auto"
+  />
   <!-- <Image src={imageUrl} width={350} aspectRatio={4/3} alt={title} class="object-cover mx-auto" /> -->
   <div class="px-2 py-3 md:px-5 md:pb-5 space-y-3">
     <h1 class="md:text-2xl">{title}</h1>
@@ -330,27 +336,32 @@ export default function LinkButton({
 ---
 import { getAllPosts } from 'src/utils/api';
 import LinkButton from '@components/LinkButton';
-import PostGrid from "@components/PostGrid";
-import MainLayout from "@layouts/MainLayout.astro";
-import Container from "@components/Container";
-import PostCard from "@components/PostCard.astro";
+import PostGrid from '@components/PostGrid';
+import MainLayout from '@layouts/MainLayout.astro';
+import Container from '@components/Container';
+import PostCard from '@components/PostCard.astro';
 import Data from '../utils/data.json';
 
 type Post = typeof Data;
 
 const data = await getAllPosts();
 const posts: Post[] = data?.items;
-
 ---
 
 <MainLayout>
   <Container className="py-5 md:py-10">
     <PostGrid>
-      {posts.map(post=>{
-        return <PostCard image={post.thumbnail} id={post._id} title={post.title} />
-      })}
+      {
+        posts.map((post) => {
+          return (
+            <PostCard image={post.thumbnail} id={post._id} title={post.title} />
+          );
+        })
+      }
     </PostGrid>
-    <LinkButton href="/posts/1" className="w-11/12 mx-auto max-w-sm">記事をもっと探す</LinkButton>
+    <LinkButton href="/posts/1" className="w-11/12 mx-auto max-w-sm">
+      記事をもっと探す
+    </LinkButton>
   </Container>
 </MainLayout>
 ```
@@ -370,44 +381,45 @@ const posts: Post[] = data?.items;
 ```astro
 ---
 // import { Image } from '@astrojs/image/components';
-import Container from "@components/Container";
+import Container from '@components/Container';
 import LinkButton from '@components/LinkButton';
-import MainLayout from "@layouts/MainLayout.astro";
+import MainLayout from '@layouts/MainLayout.astro';
 import Data from '@utils/data.json';
 import { parse } from 'node-html-parser';
 import { getAllPosts } from 'src/utils/api';
 type Post = typeof Data;
 
 // [id]として設定した動的なRouteに渡す値をgetStaticPathsで取得
-export async function getStaticPaths(){
+export async function getStaticPaths() {
   const data = await getAllPosts();
   const posts: Post[] = data.items;
 
   // 投稿の中身も取得できる
-  return posts.map(post=>{
+  return posts.map((post) => {
     return {
-      params: {id: post._id},
-      props: {post}
-    }
-  })
+      params: { id: post._id },
+      props: { post },
+    };
+  });
 }
 
-const {post} = Astro.props;
+const { post } = Astro.props;
 const imageUrl = post.thumbnail?.src;
 // node-html-parserでHTMLデータを解析
 const content = parse(post.content);
-
 ---
 
 <MainLayout>
   <Container className="py-5 max-w-5xl space-y-4 lg:space-y-8 lg:pb-20">
     <h1 class="text-3xl text-center">{post.title}</h1>
-    <img src={imageUrl} alt={post.title} class="aspect-video object-cover">
+    <img src={imageUrl} alt={post.title} class="aspect-video object-cover" />
     <!-- <Image src={imageUrl} width={1200} aspectRatio={16/9} /> -->
     <div class="px-5 prose max-w-none">
       {content}
     </div>
-    <LinkButton href="/" className="w-11/12 mx-auto max-w-sm">ホームに戻る</LinkButton>
+    <LinkButton href="/" className="w-11/12 mx-auto max-w-sm">
+      ホームに戻る
+    </LinkButton>
   </Container>
 </MainLayout>
 ```

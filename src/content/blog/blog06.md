@@ -43,22 +43,39 @@ Integrationタブを選択するとポスト先のURLを取得できます。今
 
 ```astro
 ---
-import Container from "@components/Container";
-import FormInput from "@components/FormInput";
-import MainLayout from "@layouts/MainLayout.astro";
-const PUBLIC_FORMSPREE_URI = import.meta.env.PUBLIC_FORMSPREE_URI
+import Container from '@components/Container';
+import FormInput from '@components/FormInput';
+import MainLayout from '@layouts/MainLayout.astro';
+const PUBLIC_FORMSPREE_URI = import.meta.env.PUBLIC_FORMSPREE_URI;
 ---
 
 <MainLayout>
   <Container className="py-5">
     <div class="grid place-content-center place-items-center">
-      <form id="contact-form" action={PUBLIC_FORMSPREE_URI} method="POST" class="py-3 px-5 md:py-5 md:px-8 shadow dark:bg-slate-700 w-80 md:w-96">
+      <form
+        id="contact-form"
+        action={PUBLIC_FORMSPREE_URI}
+        method="POST"
+        class="py-3 px-5 md:py-5 md:px-8 shadow dark:bg-slate-700 w-80 md:w-96"
+      >
         <fieldset class="space-y-5">
           <FormInput name="name" label="お名前" required />
           <FormInput name="email" label="メールアドレス" required />
-          <FormInput name="message" label="メールアドレス" placeholder="ご用件をどうぞ..." textarea required className="min-h-[200px]" />
+          <FormInput
+            name="message"
+            label="メールアドレス"
+            placeholder="ご用件をどうぞ..."
+            textarea
+            required
+            className="min-h-[200px]"
+          />
           <div class="text-center">
-            <button id="submit-button" type="submit" class="bg-blue-500 text-white py-2 px-5 rounded-lg  transition hover:brightness-110 focus:brightness-110">送信する</button>
+            <button
+              id="submit-button"
+              type="submit"
+              class="bg-blue-500 text-white py-2 px-5 rounded-lg transition hover:brightness-110 focus:brightness-110"
+              >送信する</button
+            >
           </div>
           <p id="my-form-status" class="text-center"></p>
         </fieldset>
@@ -69,39 +86,44 @@ const PUBLIC_FORMSPREE_URI = import.meta.env.PUBLIC_FORMSPREE_URI
 
 <!-- JavaScriptを読み込ませるためにis:inlineを指定 -->
 <script is:inline>
-  const form = document.getElementById("contact-form");
-  const submitButton = document.getElementById("submit-button");
-  const status = document.getElementById("my-form-status");
+  const form = document.getElementById('contact-form');
+  const submitButton = document.getElementById('submit-button');
+  const status = document.getElementById('my-form-status');
   async function handleSubmit(event) {
     event.preventDefault();
-    submitButton.textContent = "送信中です...";
+    submitButton.textContent = '送信中です...';
     const data = new FormData(event.target);
     fetch(event.target.action, {
       method: form.method,
       body: data,
       headers: {
-          'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-        status.textContent = "お問い合わせありがとうございます。";
-        form.reset()
-      } else {
-        response.json().then(data => {
-          if (Object.hasOwn(data, 'errors')) {
-            status.textContent = data["errors"].map(error => error["message"]).join(", ")
-          } else {
-            status.textContent = "嗚呼、送信エラーです。"
-          }
-        })
-      }
-    }).catch(error => {
-      status.textContent = "ごめんなさい。送信エラーです。"
-    }).finally(() => {
-      submitButton.textContent = "送信する"
-    });
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          status.textContent = 'お問い合わせありがとうございます。';
+          form.reset();
+        } else {
+          response.json().then((data) => {
+            if (Object.hasOwn(data, 'errors')) {
+              status.textContent = data['errors']
+                .map((error) => error['message'])
+                .join(', ');
+            } else {
+              status.textContent = '嗚呼、送信エラーです。';
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        status.textContent = 'ごめんなさい。送信エラーです。';
+      })
+      .finally(() => {
+        submitButton.textContent = '送信する';
+      });
   }
-  form.addEventListener("submit", handleSubmit)
+  form.addEventListener('submit', handleSubmit);
 </script>
 ```
 

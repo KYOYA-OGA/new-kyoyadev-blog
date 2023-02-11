@@ -2,20 +2,17 @@
 import BlogItem from '@components/BlogItem.astro';
 import LinkButton from '@components/LinkButton';
 import MainLayout from '@layouts/MainLayout.astro';
-const posts = await Astro.glob('./posts/*.md');
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => {
-  return Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date);
+  return Date.parse(b.data.date) - Date.parse(a.data.date);
 });
 const firstThreePosts = sortedPosts.slice(0, 3);
 ---
 
 <MainLayout title="Top">
   <div class="divide-y divide-primary dark:divide-soft-white">
-    {
-      firstThreePosts.map((post) => (
-        <BlogItem key={post.frontmatter.url} post={post} />
-      ))
-    }
+    {firstThreePosts.map((post) => <BlogItem key={post.id} post={post} />)}
   </div>
   <div class="mt-10 max-w-sm mx-auto">
     <LinkButton secondary href="/blogs/1">ブログ一覧ページへ</LinkButton>
