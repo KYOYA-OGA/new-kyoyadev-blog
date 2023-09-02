@@ -22,11 +22,11 @@ export default function Navbar({ menuIsOpen }: Props) {
             About
           </a>
         </li>
-        <li>
+        {/* <li>
           <a className="hover:opacity-80 transition-opacity" href="/projects">
             Projects
           </a>
-        </li>
+        </li> */}
       </ul>
       <SocialIcons />
     </nav>
